@@ -13,7 +13,7 @@ const App = () => {
   if (isLoading)
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh" flexDirection='column'>
-        <Typography variant="h4" align="center" sx={{ mt: 1, mb: 2 }}>ISPH Mini CS50x Leaderboard</Typography>
+        <Typography variant="h4" color='white' align="center" sx={{ mt: 1, mb: 2 }}>ISPH Mini CS50x Leaderboard</Typography>
         <CircularProgress />
       </Box>
     );
@@ -21,7 +21,7 @@ const App = () => {
   if (isError)
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh" flexDirection='column'>
-        <Typography variant="h4" align="center" sx={{mt: 3, mb: 2 }}>ISPH Mini CS50x Leaderboard</Typography>
+        <Typography variant="h4" color='white' align="center" sx={{mt: 3, mb: 2 }}>ISPH Mini CS50x Leaderboard</Typography>
         <Typography color="error">Error fetching rankings.</Typography>
       </Box>
     );
