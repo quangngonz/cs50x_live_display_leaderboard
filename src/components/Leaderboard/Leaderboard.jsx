@@ -8,7 +8,7 @@ import Header from "../Header/Header.jsx";
 
 const Leaderboard = ({ rankings }) => {
   return (
-    <Box sx={{ width: "100%", mb: 2, paddingX: 3,  borderRadius: 2}}>
+    <Box sx={{  mb: 2, mt: 1,  borderRadius: 2}}>
       <Header />
       <Divider sx={{ width: "100%", my: 1 }}  />
       <Flipper flipKey={rankings.map(d => d.team_name).join("-")}>

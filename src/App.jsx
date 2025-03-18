@@ -1,11 +1,15 @@
 import React from "react";
 
 import useTeamRankings from "./hooks/useTeamRankings.js";
-import Typography from "@mui/material/Typography";
+import useRecentSubmissions from "./hooks/useRecentSubmission.js";
+
+import {Box, CircularProgress, Typography} from "@mui/material";
 import "./App.css";
-import Leaderboard from "./components/Leaderboard/Leaderboard.jsx";
-import {Box, CircularProgress} from "@mui/material";
+
 import Title from "./components/Title/Title.jsx";
+import Leaderboard from "./components/Leaderboard/Leaderboard.jsx";
+import RecentSubmissions from "./components/RecentSubmissions/RecentSubmissions.jsx";
+
 
 const App = () => {
   const { data: rankings, isLoading, isError } = useTeamRankings();
@@ -27,7 +31,7 @@ const App = () => {
     );
 
   return (
-    <Box display="flex" justifyContent="top" alignItems="center" flexDirection='column' sx={{backgroundColor: "#fcf8ed", paddingX: 4, minHeight: "100vh"}}>
+    <Box display="flex" justifyContent="top" alignItems="center" flexDirection='column' sx={{backgroundColor: "#fcf8ed", minHeight: "100vh", width: "100%"}}>
       <Title />
       <Leaderboard className='leaderboard' rankings={rankings}/>
     </ Box>
