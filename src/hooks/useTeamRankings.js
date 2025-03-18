@@ -1,4 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import supabase from "../services/supabaseClient.js";
 
 const fetchRankings = async () => {
   const response = await fetch(
@@ -9,12 +11,33 @@ const fetchRankings = async () => {
 };
 
 const useTeamRankings = () => {
-  return useQuery({
+  const queryClient = useQueryClient();
+
+  const query = useQuery({
     queryKey: ['rankings'],
     queryFn: fetchRankings,
     staleTime: 60000, // Cache for 1 min
-    refetchInterval: 5000,
+    refetchInterval: 30000, // Polling every 5s
   });
+
+  useEffect(() => {
+    const subscription = supabase
+      .channel("submissions")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "submissions" },
+        () => {
+          queryClient.invalidateQueries(['rankings']);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [queryClient]);
+
+  return query;
 };
 
 export default useTeamRankings;
