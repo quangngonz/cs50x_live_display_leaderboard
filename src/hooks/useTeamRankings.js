@@ -21,7 +21,7 @@ const useTeamRankings = () => {
   });
 
   useEffect(() => {
-    const subscription = supabase
+    const submissionsSubscription = supabase
       .channel("submissions")
       .on(
         "postgres_changes",
@@ -32,8 +32,20 @@ const useTeamRankings = () => {
       )
       .subscribe();
 
+    const hintsSubscription = supabase
+      .channel("hints_given")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "hints_given" },
+        () => {
+          queryClient.invalidateQueries(['rankings']);
+        }
+      )
+      .subscribe();
+
     return () => {
-      subscription.unsubscribe();
+      submissionsSubscription.unsubscribe();
+      hintsSubscription.unsubscribe();
     };
   }, [queryClient]);
 

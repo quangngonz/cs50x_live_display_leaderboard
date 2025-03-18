@@ -1,40 +1,21 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-import useTeamRankings from "./hooks/useTeamRankings.js";
-import useRecentSubmissions from "./hooks/useRecentSubmission.js";
+import LeaderboardPage from "./pages/Leaderboard/LeaderboardPage.jsx";
+import AdminPage from "./pages/Admin/AdminPage.jsx";
 
-import {Box, CircularProgress, Typography} from "@mui/material";
 import "./App.css";
-
-import Title from "./components/Title/Title.jsx";
-import Leaderboard from "./components/Leaderboard/Leaderboard.jsx";
-import RecentSubmissions from "./components/RecentSubmissions/RecentSubmissions.jsx";
-
+import AdminLogin from "./pages/AdminLogin/AdminLogin.jsx";
 
 const App = () => {
-  const { data: rankings, isLoading, isError } = useTeamRankings();
-
-  if (isLoading)
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="100vh" flexDirection='column'>
-        <Typography variant="h4" color='#a40f33' align="center" sx={{ mt: 1, mb: 2 }}>ISPH Mini CS50x Leaderboard</Typography>
-        <CircularProgress />
-      </Box>
-    );
-
-  if (isError)
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="100vh" flexDirection='column'>
-        <Typography variant="h4" color='#a40f33' align="center" sx={{mt: 3, mb: 2 }}>ISPH Mini CS50x Leaderboard</Typography>
-        <Typography color="error">Error fetching rankings.</Typography>
-      </Box>
-    );
-
   return (
-    <Box display="flex" justifyContent="top" alignItems="center" flexDirection='column' sx={{backgroundColor: "#fcf8ed", minHeight: "100vh", width: "100%"}}>
-      <Title />
-      <Leaderboard className='leaderboard' rankings={rankings}/>
-    </ Box>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LeaderboardPage />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="*" element={<Navigate to='/' /> } />
+      </Routes>
+    </Router>
   );
 };
 

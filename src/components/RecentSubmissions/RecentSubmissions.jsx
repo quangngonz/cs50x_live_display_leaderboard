@@ -1,32 +1,51 @@
-import {Box, Card, List, ListItem, Typography} from "@mui/material";
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper } from "@mui/material";
 import React from "react";
 
 const RecentSubmissions = ({ recentSubmissions }) => {
+  console.log(recentSubmissions);
 
   if (recentSubmissions.length === 0) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" flexDirection='column' sx={{width: "100%"}}>
-        <Typography variant="h5" color='#a40f33' align="center" sx={{mt: 3, mb: 2 }}>Recent Submissions</Typography>
-        <Typography variant="body1" align="center" sx={{mt: 1, mb: 1 }}>No recent submissions</Typography>
+      <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ width: "100%" }}>
+        <Typography variant="h5" color="#a40f33" align="center" sx={{ mt: 3, mb: 2 }}>
+          Recent Submissions
+        </Typography>
+        <Typography variant="body1" align="center" sx={{ mt: 1, mb: 1 }}>
+          No recent submissions
+        </Typography>
       </Box>
     );
   }
 
   return (
-        <Box display="flex" justifyContent="center" alignItems="center" flexDirection='column' sx={{width: "100%"}}>
-          <Typography variant="h5" color='#a40f33' align="center" sx={{mt: 3, mb: 2 }}>Recent Submissions</Typography>
-          <List sx={{width: "100%"}}>
+    <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ width: "100%" }}>
+      <h1
+        style={{fontSize: '2rem', marginTop: "1rem", textAlign: 'center', color: '#a40f33', fontWeight: 'normal'}}>
+        Recent Submission
+      </h1>
+
+      <TableContainer component={Paper} sx={{maxWidth: "80%"}}>
+        <Table>
+          <TableHead>
+            <TableRow>
+            <TableCell align="center">Team Name</TableCell>
+              <TableCell align="center">Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {recentSubmissions.map((submission, index) => (
-              <ListItem key={index}>
-                <Card sx={{width: "100%"}}>
-                  <Typography variant="body1" align="center" sx={{mt: 1, mb: 1 }}>{submission.team_name_id}</Typography>
-                  <Typography variant="body1" align="center" sx={{mt: 1, mb: 1 }}>{submission.correct ? "Correct" : "Incorrect"}</Typography>
-                </Card>
-              </ListItem>
+              <TableRow key={index}>
+                <TableCell align="center">{submission.team_name_id}</TableCell>
+                <TableCell align="center" sx={{ color: submission.correct ? "green" : "red" }}>
+                  {submission.correct ? "Correct" : "Incorrect"}
+                </TableCell>
+              </TableRow>
             ))}
-          </List>
-        </Box>
-      )
-}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
+};
 
 export default RecentSubmissions;

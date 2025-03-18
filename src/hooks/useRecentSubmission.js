@@ -20,8 +20,8 @@ export default function useRecentSubmissions() {
             submitted_at: payload.new.submitted_at,
             team_name_id: payload.new.team_name_id,
           }
-          console.log(newMessage)
-          setSubmissions((prev) => [newMessage, ...prev].slice(0, 10));
+
+          setSubmissions((prev) => [newMessage, ...prev].slice(0, 5));
         }
       )
       .subscribe();
@@ -36,7 +36,9 @@ export default function useRecentSubmissions() {
       .from("submissions")
       .select("id, answer, correct, submitted_at, team_name_id")
       .order("submitted_at", { ascending: false })
-      .limit(10);
+      .limit(5);
+
+    console.log(data)
 
     if (!error) setSubmissions(data);
   }
