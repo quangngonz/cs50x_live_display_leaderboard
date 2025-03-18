@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import { Box, Card, Divider } from "@mui/material";
+import {Box, Card, Divider} from "@mui/material";
 import React from "react";
 
 const Header = () => {
@@ -31,7 +31,7 @@ const Header = () => {
         Team Name
       </Typography>
 
-      <Divider orientation="vertical" flexItem />
+      <Divider orientation="vertical" flexItem/>
 
       {/* Status Icons */}
       <Box
@@ -55,14 +55,14 @@ const Header = () => {
         </Typography>
       </Box>
 
-      <Divider orientation="vertical" flexItem />
+      <Divider orientation="vertical" flexItem/>
 
-      {/* Hints Given */}
+      {/* Wrong Answers Given */}
       <Box
         sx={{
           display: "flex",
           flexShrink: 0,
-          minWidth: 80,
+          minWidth: 50,
           justifyContent: "center",
           gap: 1,
         }}
@@ -70,7 +70,31 @@ const Header = () => {
         <Typography
           variant="h6"
           sx={{
-            fontSize: "1.25rem",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          ❌
+        </Typography>
+      </Box>
+
+      <Divider orientation="vertical" flexItem/>
+
+      {/* Hints Given */}
+      <Box
+        sx={{
+          display: "flex",
+          flexShrink: 0,
+          minWidth: 50,
+          justifyContent: "center",
+          gap: 1,
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: "1rem",
             fontWeight: "bold",
             textAlign: "center",
           }}
@@ -79,7 +103,7 @@ const Header = () => {
         </Typography>
       </Box>
 
-      <Divider orientation="vertical" flexItem />
+      <Divider orientation="vertical" flexItem/>
 
       {/* Score */}
       <Box

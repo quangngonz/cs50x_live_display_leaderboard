@@ -10,7 +10,7 @@ const Leaderboard = ({ rankings }) => {
   return (
     <Box sx={{ width: "100%", mb: 2, paddingX: 3,  borderRadius: 2}}>
       <Header />
-      <Divider sx={{ width: "100%", my: 1 }} />
+      <Divider sx={{ width: "100%", my: 1 }}  />
       <Flipper flipKey={rankings.map(d => d.team_name).join("-")}>
         <Box component="ul" sx={{ width: "100%", listStyle: "none", padding: 0, margin: 0 }}>
           {rankings.map((d, index) => (
