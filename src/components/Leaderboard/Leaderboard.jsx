@@ -3,12 +3,12 @@ import React from "react";
 import {Flipped, Flipper} from "react-flip-toolkit";
 
 import TeamCard from "../TeamCard/TeamCard.jsx";
-import {Box, Card, Divider, Paper} from "@mui/material";
+import {Box, Divider} from "@mui/material";
 import Header from "../Header/Header.jsx";
 
 const Leaderboard = ({ rankings }) => {
   return (
-    <Paper sx={{ width: "100%", mb: 2, p: 3,  borderRadius: 2}}>
+    <Box sx={{ width: "100%", mb: 2, paddingX: 3,  borderRadius: 2}}>
       <Header />
       <Divider sx={{ width: "100%", my: 1 }} />
       <Flipper flipKey={rankings.map(d => d.team_name).join("-")}>
@@ -22,7 +22,7 @@ const Leaderboard = ({ rankings }) => {
           ))}
         </Box>
       </Flipper>
-    </Paper>
+    </Box>
   );
 };
 

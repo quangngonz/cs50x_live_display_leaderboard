@@ -1,22 +1,3 @@
-body {
-    font-size: 2.5rem;
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
-    "Roboto", "Helvetica Neue", Arial, sans-serif;
-
-    background: linear-gradient(135deg, #0E1C36, #a40f33, #f4eac6);
-    background-size: 400% 400%;
-    animation: gradientMove 10s infinite alternate;
-}
-@keyframes gradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-}
-
-
 #root {
    width: 100%;
     padding: 0 20vw;

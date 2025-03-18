@@ -11,9 +11,9 @@ const Header = () => {
         px: 2,
         py: 1,
         gap: 2,
-        backgroundColor: "#f8f9fa",
+        backgroundColor: "#f6f6f6",
         boxShadow: 2,
-        borderRadius: 2,
+        borderRadius: 1,
       }}
     >
       {/* Team Name */}

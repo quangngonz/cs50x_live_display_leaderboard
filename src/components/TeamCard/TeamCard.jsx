@@ -5,10 +5,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 const TeamCard = ({ teamData }) => {
   const { team_name, solves, score, hints_given } = teamData;
-  const [statuses, timestamps] = solves;
+  const [statuses, _] = solves;
 
   return (
-    <Card sx={{ display: "flex", alignItems: "center", px: 2, py: 1, gap: 2, minHeight: 60, boxShadow: 2, borderRadius: 2 }}>
+    <Card sx={{ display: "flex", alignItems: "center", px: 2, py: 1, gap: 2, minHeight: 60, boxShadow: 2, borderRadius: 1,}}>
       {/* Team Name */}
       <Typography variant="h5" sx={{ paddingLeft: 2, flexShrink: 0, width: 150, fontSize: "1.5rem", textAlign: "left" }}>
         {team_name}
