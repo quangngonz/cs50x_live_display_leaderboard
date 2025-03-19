@@ -76,7 +76,7 @@ const AddHintForm =  () => {
 
           <TextField
             select
-            label="Question ID"
+            label="Question Number"
             value={questionId}
             onChange={(e) => setQuestionId(e.target.value)}
             fullWidth
