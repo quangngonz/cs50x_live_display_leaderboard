@@ -15,6 +15,7 @@ export default function useRecentSubmissions() {
         (payload) => {
           const newMessage = {
             id: payload.new.id,
+            question_id: payload.new.question_id,
             answer: payload.new.answer,
             correct: payload.new.correct,
             submitted_at: payload.new.submitted_at,
@@ -34,7 +35,7 @@ export default function useRecentSubmissions() {
   async function fetchSubmissions() {
     const { data, error } = await supabase
       .from("submissions")
-      .select("id, answer, correct, submitted_at, team_name_id")
+      .select("id, answer, correct, submitted_at, team_name_id, question_id")
       .order("submitted_at", { ascending: false })
       .limit(5);
 

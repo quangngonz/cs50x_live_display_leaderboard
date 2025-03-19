@@ -29,6 +29,7 @@ const RecentSubmissions = ({ recentSubmissions }) => {
           <TableHead>
             <TableRow>
             <TableCell align="center">Team Name</TableCell>
+              <TableCell align="center">Question</TableCell>
               <TableCell align="center">Status</TableCell>
             </TableRow>
           </TableHead>
@@ -36,6 +37,7 @@ const RecentSubmissions = ({ recentSubmissions }) => {
             {recentSubmissions.map((submission, index) => (
               <TableRow key={index}>
                 <TableCell align="center">{submission.team_name_id}</TableCell>
+                <TableCell align={'center'}>{submission.question_id}</TableCell>
                 <TableCell align="center" sx={{ color: submission.correct ? "green" : "red" }}>
                   {submission.correct ? "Correct" : "Incorrect"}
                 </TableCell>
