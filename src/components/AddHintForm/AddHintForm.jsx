@@ -8,6 +8,7 @@ const AddHintForm =  () => {
   const [teamNameId, setTeamNameId] = useState("");
   const [questionId, setQuestionId] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { data: questions, isLoading, error } = useFetchQuestions();
   const [questionsList, setQuestionsList] = useState([]);
 
@@ -17,9 +18,11 @@ const AddHintForm =  () => {
   }
 
   useEffect(() => {
-    const questionsNames = questions.map((question) => question.question);
-    setQuestionsList(questionsNames);
-  }, [questions]);
+    if (!isLoading){
+      const questionsNames = questions.map((question) => question.question);
+      setQuestionsList(questionsNames);
+    }
+  }, [isLoading, questions]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -84,7 +87,7 @@ const AddHintForm =  () => {
         Add Hint
       </h1>
 
-      <Paper maxWidth="sm" sx={{ width: "100%"}}>
+      <Paper maxWidth="sm" sx={{ width: "100%", maxWidth: "80%"}}>
 
         <form onSubmit={handleSubmit} style={{ margin: "1rem" }}>
           <TextField
