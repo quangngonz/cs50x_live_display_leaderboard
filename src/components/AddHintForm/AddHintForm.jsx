@@ -1,13 +1,33 @@
-import {Box, Button, MenuItem, Paper, TextField, Typography} from "@mui/material";
-import React, {useState} from "react";
+import {Box, Button, MenuItem, Paper, TextField} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import useFetchQuestions from "../../hooks/useFetchQuestions.js";
 
 const teams = ["Team 1", "Team 2", "Team 3", "Team 4", "Team 5", "Team 6", "Team 7", "Team 8"];
-const questionIds = [1, 2, 3, 4, 5];
 
 const AddHintForm =  () => {
   const [teamNameId, setTeamNameId] = useState("");
   const [questionId, setQuestionId] = useState("");
   const [loading, setLoading] = useState(false);
+  const { data: questions, isLoading, error } = useFetchQuestions();
+  const [questionsList, setQuestionsList] = useState([]);
+
+  function getQuestionId(questionName) {
+    const question = questions.find(q => q.question === questionName);
+    return question ? question.id : null;  // Returns null if not found
+  }
+
+  useEffect(() => {
+    const questionsNames = questions.map((question) => question.question);
+    setQuestionsList(questionsNames);
+  }, [questions]);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +39,14 @@ const AddHintForm =  () => {
 
     setLoading(true);
 
+    const question_Id = getQuestionId(questionId);
+
+    if (!question_Id) {
+      alert("Question not found");
+      setLoading(false);
+      return
+    }
+
     try {
       const response = await fetch("https://isph-mini-cs50x-api.vercel.app/addHint", {
         method: "POST",
@@ -28,7 +56,7 @@ const AddHintForm =  () => {
         },
         body: JSON.stringify({
           team_name_id: teamNameId,
-          question_id: questionId
+          question_id: question_Id
         })
       });
 
@@ -76,15 +104,15 @@ const AddHintForm =  () => {
 
           <TextField
             select
-            label="Question Number"
+            label="Question"
             value={questionId}
             onChange={(e) => setQuestionId(e.target.value)}
             fullWidth
             margin="normal"
           >
-            {questionIds.map((id) => (
+            {questionsList.map((id, idx) => (
               <MenuItem key={id} value={id}>
-                {id}
+                {idx + 1}. {id}
               </MenuItem>
             ))}
           </TextField>
