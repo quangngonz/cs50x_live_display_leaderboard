@@ -1,4 +1,4 @@
-import {Box, Button, MenuItem, Paper, TextField} from "@mui/material";
+import {Box, Button, MenuItem, Paper, TextField, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import useFetchQuestions from "../../hooks/useFetchQuestions.js";
 
@@ -25,11 +25,29 @@ const AddHintForm =  () => {
   }, [isLoading, questions]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ width: "100%" }}>
+        <Typography variant="h5" color="#a40f33" align="center" sx={{ mt: 3, mb: 2 }}>
+          Add Hint
+        </Typography>
+        <Typography variant="body1" align="center" sx={{ mt: 1, mb: 1 }}>
+          Fetching questions...
+        </Typography>
+      </Box>
+    );
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ width: "100%" }}>
+        <Typography variant="h5" color="#a40f33" align="center" sx={{ mt: 3, mb: 2 }}>
+          Add Hint
+        </Typography>
+        <Typography variant="body1" align="center" sx={{ mt: 1, mb: 1 }}>
+          Error fetching questions
+        </Typography>
+      </Box>
+    );
   }
 
   const handleSubmit = async (e) => {
