@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Card, Typography, Box, Divider } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DecryptedText from "../DecryptedText/DecryptedText.jsx";
+import Counter from "../Counter/Counter.jsx";
 
 const TeamCard = ({ teamData }) => {
   const { team_name, solves, score, hints_given, wrong_answers } = teamData;
@@ -68,9 +69,10 @@ const TeamCard = ({ teamData }) => {
 
       {/* Score */}
       <Box sx={{ display: "flex", flexShrink: 0, minWidth: 120, gap: 1, justifyContent: "center", }}>
-        <Typography variant="h6" fontWeight="bold" sx={{ fontSize: "1.25rem", whiteSpace: "nowrap", textAlign: "left"}}>
-          {score} ⭐
-        </Typography>
+        <Counter
+          value={score}
+          places={score >= 10 ? [10, 1] : [1]}
+        />
       </Box>
     </Card>
   );
