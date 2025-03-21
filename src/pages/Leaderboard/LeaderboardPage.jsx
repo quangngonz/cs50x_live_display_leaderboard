@@ -6,6 +6,7 @@ import useTeamRankings from "../../hooks/useTeamRankings.js";
 
 import Title from "../../components/Title/Title.jsx";
 import Leaderboard from "../../components/Leaderboard/Leaderboard.jsx";
+import DecryptedText from "../../components/DecryptedText/DecryptedText.jsx";
 
 const LeaderboardPage = () => {
   const { data: rankings, isLoading, isError } = useTeamRankings();

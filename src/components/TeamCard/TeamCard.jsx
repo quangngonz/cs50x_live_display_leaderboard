@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Typography, Box, Divider } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import DecryptedText from "../DecryptedText/DecryptedText.jsx";
 
 const TeamCard = ({ teamData }) => {
   const { team_name, solves, score, hints_given, wrong_answers } = teamData;
@@ -21,7 +22,15 @@ const TeamCard = ({ teamData }) => {
           textAlign: "left",
         }}
       >
-        {team_name}
+        <DecryptedText
+          text={team_name}
+          animateOn="view"
+          speed={100}
+          maxIterations={30}
+          className="revealed"
+          parentClassName="all-letters"
+          encryptedClassName="encrypted"
+        />
       </Typography>
 
       <Divider orientation="vertical" flexItem />

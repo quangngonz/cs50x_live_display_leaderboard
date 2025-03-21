@@ -1,5 +1,6 @@
 import {Box} from "@mui/material";
 import React from "react";
+import DecryptedText from "../DecryptedText/DecryptedText.jsx";
 
 const Title = () => {
   return (
@@ -14,9 +15,19 @@ const Title = () => {
           style={{fontSize: '2rem', marginTop: "1rem", marginBottom: 0, textAlign: 'center', color: '#a40f33'}}>
           MINI CS50x PUZZLE DAY
         </h1>
+
+
         <h1
           style={{fontSize: '2.5rem', marginTop: 0, marginBottom: "1rem", textAlign: 'center', color: '#a40f33'}}>
-          LEADERBOARD
+          <DecryptedText
+            text="LEADERBOARD"
+            animateOn="view"
+            speed={100}
+            maxIterations={35}
+            className="revealed"
+            parentClassName="all-letters"
+            encryptedClassName="encrypted"
+          />
         </h1>
       </Box>
       <Box
