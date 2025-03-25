@@ -6,7 +6,7 @@ import DecryptedText from "../DecryptedText/DecryptedText.jsx";
 import Counter from "../Counter/Counter.jsx";
 
 const TeamCard = ({ teamData }) => {
-  const { team_name, solves, score, hints_given, wrong_answers } = teamData;
+  const {team_name_string, solves, score, hints_given, wrong_answers } = teamData;
   const [statuses, _] = solves;
 
   return (
@@ -24,7 +24,7 @@ const TeamCard = ({ teamData }) => {
         }}
       >
         <DecryptedText
-          text={team_name}
+          text={team_name_string}
           animateOn="view"
           speed={100}
           maxIterations={30}
