@@ -1,13 +1,23 @@
 import {Box, Button, MenuItem, Paper, TextField, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import useFetchQuestions from "../../hooks/useFetchQuestions.js";
+import useTeamRankings from "../../hooks/useTeamRankings.js";
 
-const teams = ["Team 1", "Team 2", "Team 3", "Team 4", "Team 5", "Team 6", "Team 7", "Team 8"];
 
 const AddHintForm =  () => {
   const [teamNameId, setTeamNameId] = useState("");
   const [questionId, setQuestionId] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const {data: allTeamData, isLoading: isLoadingTeam} = useTeamRankings();
+  const [teams, setTeams] = useState([]);
+
+useEffect(() => {
+  if (allTeamData) {
+    const teamNames = allTeamData.map(team => [team.team_name_string, team.team_name]);
+    setTeams(teamNames);
+  }
+}, [allTeamData]);
 
   const { data: questions, isLoading, error } = useFetchQuestions();
   const [questionsList, setQuestionsList] = useState([]);
@@ -24,7 +34,7 @@ const AddHintForm =  () => {
     }
   }, [isLoading, questions]);
 
-  if (isLoading) {
+  if (isLoading || isLoadingTeam) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ width: "100%" }}>
         <Typography variant="h5" color="#a40f33" align="center" sx={{ mt: 3, mb: 2 }}>
@@ -76,7 +86,7 @@ const AddHintForm =  () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          team_name_id: teamNameId,
+          team_name_id: teamNameId[1],
           question_id: question_Id
         })
       });
@@ -118,7 +128,7 @@ const AddHintForm =  () => {
           >
             {teams.map((team, index) => (
               <MenuItem key={index} value={team}>
-                {team}
+                {team[0]}
               </MenuItem>
             ))}
           </TextField>
