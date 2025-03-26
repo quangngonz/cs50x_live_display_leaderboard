@@ -22,7 +22,7 @@ const Header = () => {
         sx={{
           paddingLeft: 2,
           flexShrink: 0,
-          width: 150,
+          width: 200,
           fontSize: "1.25rem",
           fontWeight: "bold",
           textAlign: "left",
